@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://registro-civil-chrpcm.onrender.com/ -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chile Roleplay Community - Portal de Identidad</title>
+    <link rel="icon" type="image/png" href="https://cdn.glitch.global/d52e4a8b-f593-4fef-bc5f-ce25a87d44bc/image-removebg-preview%20(6).png?1748727381865">
+    
+    <!-- SEO y Metadatos -->
+    <meta name="description" content="Portal oficial para la creación y gestión de identidades ficticias para la comunidad de Chile Roleplay. Únete y crea tu personaje.">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="IPvsTaW63BrmDUhiM_-LJcHGEGWFBA9FvBENBHbNr14">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="./Chile Roleplay Community - Portal de Identidad_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./Chile Roleplay Community - Portal de Identidad_files/all.min.css">
+    <link href="./Chile Roleplay Community - Portal de Identidad_files/css2" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --dark-blue: #002244;
+            --light-gray: #f8f9fa;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fff;
+            color: var(--text-color);
+        }
+        .navbar { background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .navbar-brand img { height: 40px; }
+        .navbar-brand span { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--primary-blue); margin-left: 10px; }
+        .nav-link { color: var(--primary-blue) !important; font-weight: 500; margin: 0 10px; }
+        .hero-section { position: relative; padding: 100px 0; color: white; text-align: center; overflow: hidden; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://i.imgur.com/0DwyBs3.jpeg'); background-size: cover; background-position: center; filter: blur(4px) brightness(0.6); transform: scale(1.1); z-index: -1; }
+        .hero-section h1 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 3.5rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); animation: fadeInDown 1s ease-out; }
+        .hero-section p { font-size: 1.25rem; max-width: 700px; margin: 20px auto 30px; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); animation: fadeInUp 1s ease-out 0.3s; }
+        .btn-cta { font-size: 1.2rem; padding: 12px 35px; border-radius: 50px; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); border: none; }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+        .stats-section { padding: 50px 0; background: var(--light-gray); }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 700; color: var(--primary-blue); }
+        .stat-label { font-size: 1rem; color: #6c757d; }
+        .stat-item i { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 15px; }
+        .steps-section { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--primary-blue); }
+        .step-card { text-align: center; padding: 20px; }
+        .step-icon { font-size: 3rem; color: white; background-color: var(--primary-blue); width: 80px; height: 80px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0, 51, 102, 0.3); }
+        .step-card h4 { font-weight: 700; color: var(--dark-blue); }
+        .access-section { background-color: var(--light-gray); padding: 60px 0; text-align: center; }
+        .footer { background-color: var(--dark-blue); color: #ccc; padding: 40px 0; }
+        .footer h5 { color: white; font-weight: 700; }
+        .footer a { color: #ccc; text-decoration: none; transition: color 0.2s ease; }
+        .footer a:hover { color: white; }
+        .social-icons a { font-size: 1.5rem; margin: 0 10px; }
+        #notification-container { position: fixed; top: 20px; right: 20px; z-index: 1050; width: 350px; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1245.0" data-gr-ext-installed="">
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://registro-civil-chrpcm.onrender.com/#">
+                <img src="./Chile Roleplay Community - Portal de Identidad_files/oEuyEhc.png" alt="Logo Chile RP">
+                <span>Chile Roleplay Community</span>
+            </a>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link" href="https://registro-civil-chrpcm.onrender.com/registroNacional.html">Registro Nacional</a>
+                <a class="nav-link" href="https://registro-civil-chrpcm.onrender.com/vehiculos-registrados.html">Registro Vehicular</a>
+                <a class="nav-link" href="https://registro-civil-chrpcm.onrender.com/#" id="btnPoliceLogin">Portal Policial</a>
+                <a class="nav-link" href="https://registro-civil-chrpcm.onrender.com/#" id="btnAdminLogin">Administración</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <h1>FORJA TU HISTORIA. CREA TU IDENTIDAD.</h1>
+            <p>Bienvenido al portal oficial de Chile Roleplay Community. Aquí comienza tu viaje. Crea tu cédula de identidad ficticia y sumérgete en una experiencia de roleplay única.</p>
+            <div id="cta-container"><button class="btn btn-success btn-cta" id="openCreateModalBtn"><i class="fas fa-id-card"></i> Completar mi Cédula</button></div>
+        </div>
+    </header>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <div id="stat-cedulas" class="stat-number">233</div>
+                        <div class="stat-label">Identidades Creadas</div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="stat-item">
+                        <i class="fas fa-server"></i>
+                        <div id="stat-miembros" class="stat-number">4.047</div>
+                        <div class="stat-label">Miembros en Discord</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PASOS A SEGUIR -->
+    <section class="steps-section">
+        <div class="container">
+            <h2 class="section-title">¿CÓMO EMPEZAR?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-icon">1</div>
+                        <h4>Únete a Discord</h4>
+                        <p>Es el corazón de nuestra comunidad. Conéctate con otros jugadores y mantente al día.</p>
+                        <a href="https://discord.gg/chrpcm" class="btn btn-outline-primary" target="_blank">Ir a Discord</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-icon">2</div>
+                        <h4>Crea tu Identidad</h4>
+                        <p>Usa este portal para generar la cédula de tu personaje. Es tu pasaporte al roleplay.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-icon">3</div>
+                        <h4>¡A Jugar!</h4>
+                        <p>Con tu identidad lista, entra al servidor y empieza a escribir tu propia historia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCESOS ESPECIALES -->
+    <section class="access-section">
+        <div class="container">
+             <h2 class="section-title">ACCESOS DIRECTOS</h2>
+             <p class="lead mb-4">Portales para facciones y administración de la comunidad.</p>
+             <a href="https://registro-civil-chrpcm.onrender.com/#" id="btnPoliceLogin2" class="btn btn-lg btn-outline-danger mx-2"><i class="fas fa-shield-alt"></i> Portal Policial</a>
+             <a href="https://registro-civil-chrpcm.onrender.com/#" id="btnAdminLogin2" class="btn btn-lg btn-outline-secondary mx-2"><i class="fas fa-user-shield"></i> Administración</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-md-left text-center">
+                    <h5>Chile Roleplay Community</h5>
+                    <p>Un universo de historias por descubrir. © 2025</p>
+                    <p><small>Sitio ficticio para fines de roleplay. No afiliado a ninguna entidad gubernamental.</small></p>
+                </div>
+                <div class="col-md-6 text-md-right text-center">
+                    <h5>Conéctate</h5>
+                    <div class="social-icons">
+                        <a href="https://discord.gg/chrpcm" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- MODALES -->
+    <div id="notification-container"></div>
+    <div class="modal fade" id="createCedulaModal" tabindex="-1" role="dialog" aria-labelledby="createCedulaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="cedulaForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createCedulaModalLabel">Crear Cédula</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group"><label>Primer Nombre</label><input type="text" name="firstName1" class="form-control" required=""></div>
+                        <div class="form-group"><label>Segundo Nombre</label><input type="text" name="firstName2" class="form-control" required=""></div>
+                        <div class="form-group"><label>Primer Apellido</label><input type="text" name="lastName1" class="form-control" required=""></div>
+                        <div class="form-group"><label>Segundo Apellido</label><input type="text" name="lastName2" class="form-control" required=""></div>
+                        <div class="form-group"><label>Firma (Apodo)</label><input type="text" name="signature" class="form-control" required=""></div>
+                        <div class="form-group"><label>Nombre de Discord</label><input type="text" name="discordName" class="form-control" required=""></div>
+                        <div class="form-group"><label>Nombre de Roblox</label><input type="text" name="robloxName" class="form-control" required=""></div>
+                        <div class="form-group"><label>Nacionalidad</label><input type="text" name="nationality" class="form-control" required=""></div>
+                        <div class="form-group"><label>Fecha de Nacimiento</label><input type="date" name="dateOfBirth" class="form-control" required=""></div>
+                        <div class="form-group"><label>Género</label><select name="genero" class="form-control" required=""><option value="">Selecciona:</option><option value="masculino">Masculino</option><option value="femenino">Femenino</option></select></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Crear Cédula</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="adminLoginModal" tabindex="-1" role="dialog" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="adminLoginForm" action="https://registro-civil-chrpcm.onrender.com/admin/login" method="POST">
+                    <div class="modal-header"><h5 class="modal-title" id="adminLoginModalLabel">Ingreso Administración</h5><button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button></div>
+                    <div class="modal-body">
+                        <div class="form-group"><label for="adminUsername">Usuario</label><input type="text" class="form-control" id="adminUsername" name="username" placeholder="Ingresa tu usuario" required=""></div>
+                        <div class="form-group"><label for="adminPassword">Contraseña</label><input type="password" class="form-control" id="adminPassword" name="password" placeholder="Ingresa tu contraseña" required=""></div>
+                    </div>
+                    <div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-primary">Ingresar</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./Chile Roleplay Community - Portal de Identidad_files/jquery-3.5.1.min.js.descarga"></script>
+    <script src="./Chile Roleplay Community - Portal de Identidad_files/popper.min.js.descarga"></script>
+    <script src="./Chile Roleplay Community - Portal de Identidad_files/bootstrap.min.js.descarga"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const state = { currentUser: null };
+
+    // --- Funciones de Utilidad ---
+    const sanitize = (str) => {
+        if (str === null || str === undefined) return '';
+        const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+        return str.toString().replace(/[&<>"']/g, (m) => map[m]);
+    };
+    function showNotification(message, type = 'success') {
+        const container = document.getElementById('notification-container');
+        const alertId = `notif-${Date.now()}`;
+        const alert = document.createElement('div');
+        alert.id = alertId;
+        alert.className = `alert alert-${type} alert-dismissible fade show m-2`;
+        alert.innerHTML = `${sanitize(message)}<button type="button" class="close" data-dismiss="alert">&times;</button>`;
+        container.appendChild(alert);
+        setTimeout(() => $(`#${alertId}`).alert('close'), 5000);
+    }
+
+    // --- Lógica de la Página ---
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString('es-CL');
+            if (progress < 1) window.requestAnimationFrame(step);
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    async function loadCommunityStats() {
+        try {
+            const res = await fetch(window.location.origin + '/api/stats/community');
+            if (!res.ok) return;
+            const stats = await res.json();
+            const cedulasEl = document.getElementById('stat-cedulas');
+            const miembrosEl = document.getElementById('stat-miembros');
+            if (cedulasEl && stats.cedulasCount) animateValue(cedulasEl, 0, stats.cedulasCount, 1500);
+            if (miembrosEl && stats.membersCount) animateValue(miembrosEl, 0, stats.membersCount, 1500);
+        } catch (error) {
+            console.error("Error cargando estadísticas:", error);
+        }
+    }
+
+    // FIX: Lógica de UI actualizada para manejar la cédula existente
+    async function updateAuthUI() {
+        try {
+            const res = await fetch(window.location.origin + '/api/me');
+            const user = res.ok ? await res.json() : null;
+            const ctaContainer = document.getElementById('cta-container');
+
+            if (user && (user.type === 'public' || user.type === 'discord-public')) {
+                state.currentUser = user;
+                
+                // Se comprueba si el usuario ya tiene una cédula
+                if (user.hasCedula) {
+                    // Si ya tiene, el botón se convierte en un enlace a su expediente
+                    ctaContainer.innerHTML = `<a href="/mis-datos.html" class="btn btn-info btn-cta"><i class="fas fa-address-card"></i> Ver Mi Expediente</a>`;
+                } else {
+                    // Si no tiene, el botón permite crearla
+                    ctaContainer.innerHTML = `<button class="btn btn-success btn-cta" id="openCreateModalBtn"><i class="fas fa-id-card"></i> Completar mi Cédula</button>`;
+                    document.getElementById('openCreateModalBtn').addEventListener('click', () => {
+                        const discordNameInput = document.querySelector('#createCedulaModal input[name="discordName"]');
+                        if (discordNameInput) discordNameInput.value = user.username;
+                        $('#createCedulaModal').modal('show');
+                    });
+                }
+            } else {
+                // Si no hay usuario, el botón inicia el flujo de login.
+                state.currentUser = null;
+                ctaContainer.innerHTML = `<a href="/auth/discord" class="btn btn-primary btn-cta"><i class="fab fa-discord"></i> Únete y Crea tu Cédula</a>`;
+            }
+        } catch (error) {
+            console.error("Error actualizando UI de autenticación:", error);
+            document.getElementById('cta-container').innerHTML = `<a href="/auth/discord" class="btn btn-primary btn-cta"><i class="fab fa-discord"></i> Únete y Crea tu Cédula</a>`;
+        }
+    }
+    
+    document.getElementById('cedulaForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        
+        try {
+            const response = await fetch(window.location.origin + '/api/cedulas', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || 'Error desconocido.');
+
+            showNotification("¡Cédula creada con éxito! Bienvenido a la comunidad.", "success");
+            $('#createCedulaModal').modal('hide');
+            e.target.reset();
+            loadCommunityStats(); // Refrescar estadísticas
+            updateAuthUI(); // FIX: Volver a verificar el estado para deshabilitar el botón
+        } catch (error) {
+            showNotification(`Error: ${error.message}`, 'danger');
+        }
+    });
+
+    const setupEventListeners = () => {
+        const policeBtns = [document.getElementById('btnPoliceLogin'), document.getElementById('btnPoliceLogin2')];
+        const adminBtns = [document.getElementById('btnAdminLogin'), document.getElementById('btnAdminLogin2')];
+        policeBtns.forEach(btn => {
+            if(btn) btn.addEventListener('click', (e) => { e.preventDefault(); window.location.href = '/auth/discord/police'; });
+        });
+        adminBtns.forEach(btn => {
+            if(btn) btn.addEventListener('click', (e) => { e.preventDefault(); $('#adminLoginModal').modal('show'); });
+        });
+    };
+    
+    // --- Inicialización ---
+    updateAuthUI();
+    loadCommunityStats();
+    setupEventListeners();
+});
+</script>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
