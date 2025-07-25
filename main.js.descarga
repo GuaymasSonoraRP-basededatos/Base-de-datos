@@ -1,0 +1,290 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    console.log('Comisaría Virtual - Lógica principal cargada y lista.');
+
+    // --- 1. SELECCIÓN DE ELEMENTOS GLOBALES ---
+    const sessionControls = document.getElementById('session-controls');
+    const cardButtons = document.querySelectorAll('.card button[data-modal-id]');
+    const lightbox = document.getElementById('lightbox-modal');
+    const filterButtons = document.querySelector('.filter-buttons');
+
+    // --- 2. FUNCIONES DE UTILIDAD (Modales y Notificaciones) ---
+
+    function showToast(message, type = 'info', duration = 5000) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.add('hide');
+            toast.addEventListener('animationend', () => toast.remove());
+        }, duration);
+    }
+
+    const openModal = (modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.add('show');
+    };
+
+    const closeModal = (modal) => {
+        if (modal) {
+            modal.classList.remove('show');
+            modal.querySelectorAll('.form-control').forEach(input => {
+                input.classList.remove('is-valid', 'is-invalid');
+                const errorElement = input.parentElement.querySelector('.error-message');
+                if (errorElement) errorElement.remove();
+            });
+            const tipoDenunciaSelect = document.getElementById('tipoDenunciaVehicular');
+            if (tipoDenunciaSelect && tipoDenunciaSelect.closest('.modal') === modal) {
+                const camposEspecificos = document.getElementById('campos-robo-especifico');
+                camposEspecificos.style.display = 'none';
+                camposEspecificos.querySelectorAll('input').forEach(input => input.removeAttribute('required'));
+            }
+        }
+    };
+
+    // --- 3. LÓGICA DE SESIÓN DE USUARIO ---
+
+    function updateSessionUI(data) {
+        if (data.success && data.user) {
+            // --- USUARIO LOGUEADO ---
+            let userRankHTML = data.user.isAdmin ? `<strong id="user-rank">${data.user.rango}</strong>` : '';
+            sessionControls.innerHTML = `
+                <div class="dropdown" title="Usuario">
+                    <div class="user-info-header">
+                        <img src="${data.user.avatar}" alt="Avatar" class="user-avatar-header">
+                        <div class="user-details-header">
+                            <span>${data.user.username}</span>
+                            ${userRankHTML}
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                        ${data.user.isAdmin ? '<a href="/funcionarios.html"><i class="fas fa-tachometer-alt"></i> Panel</a>' : ''}
+                        <a href="/logout" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                    </div>
+                </div>
+            `;
+            // Habilita los botones y les quita la clase de "requiere login"
+            cardButtons.forEach(button => {
+                button.classList.remove('btn-requires-login');
+                button.textContent = 'Iniciar trámite';
+                button.removeAttribute('title');
+            });
+        } else {
+            // --- USUARIO NO LOGUEADO ---
+            sessionControls.innerHTML = `
+                <div class="dropdown" title="Ingresar">
+                    <button class="btn btn-primary">Ingresar</button>
+                    <div class="dropdown-content login-options">
+                        <a href="/auth/user" class="btn-login-option"><i class="fas fa-user"></i> Como Usuario</a>
+                        <a href="/auth/discord" class="btn-login-option"><i class="fas fa-user-shield"></i> Como Funcionario</a>
+                    </div>
+                </div>
+            `;
+            // Aplica el estilo de "falso deshabilitado" y cambia el texto
+            cardButtons.forEach(button => {
+                button.classList.add('btn-requires-login');
+                button.textContent = 'Debes Iniciar Sesión';
+                button.title = 'Debes iniciar sesión para realizar un trámite.';
+            });
+        }
+    }
+
+    async function checkUserSession() {
+        try {
+            const response = await fetch('/api/me');
+            const data = await response.json();
+            updateSessionUI(data);
+        } catch (error) {
+            console.error("Error al verificar la sesión:", error);
+            updateSessionUI({ success: false });
+        }
+    }
+
+    // --- 4. LÓGICA DE FORMULARIOS Y VALIDACIÓN ---
+
+    function validateInput(input) {
+        let isValid = true;
+        let errorMessage = '';
+        if (input.hasAttribute('required') && input.value.trim() === '') {
+            isValid = false;
+            errorMessage = 'Este campo es obligatorio.';
+        }
+        updateInputFeedback(input, isValid, errorMessage);
+        return isValid;
+    }
+
+    function updateInputFeedback(input, isValid, message) {
+        const formGroup = input.parentElement;
+        let errorElement = formGroup.querySelector('.error-message');
+        input.classList.remove('is-valid', 'is-invalid');
+        if (errorElement) errorElement.remove();
+        if (!isValid) {
+            input.classList.add('is-invalid');
+            const newErrorElement = document.createElement('div');
+            newErrorElement.className = 'error-message';
+            newErrorElement.textContent = message;
+            newErrorElement.style.display = 'block';
+            input.parentNode.insertBefore(newErrorElement, input.nextSibling);
+        }
+    }
+
+    function validateForm(form) {
+        let isFormValid = true;
+        form.querySelectorAll('input[required], textarea[required], select[required]').forEach(input => {
+            if (!validateInput(input)) isFormValid = false;
+        });
+        return isFormValid;
+    }
+
+    // --- 5. EVENT LISTENERS (ESCUCHADORES DE EVENTOS) ---
+
+    // Listener para abrir modales (con la nueva lógica)
+    document.querySelectorAll('button[data-modal-id]').forEach(button => {
+        button.addEventListener('click', (event) => {
+            if (button.classList.contains('btn-requires-login')) {
+                event.preventDefault();
+                event.stopPropagation();
+                const loginButtonContainer = document.querySelector('#session-controls .dropdown');
+                if (loginButtonContainer) {
+                    loginButtonContainer.classList.add('shake-it');
+                    setTimeout(() => {
+                        loginButtonContainer.classList.remove('shake-it');
+                    }, 600);
+                }
+                showToast('Por favor, inicia sesión desde el menú de arriba.', 'info');
+                return;
+            }
+            openModal(button.dataset.modalId);
+        });
+    });
+
+    // Listener para cerrar modales
+    document.querySelectorAll('.modal').forEach(modal => {
+        const closeButton = modal.querySelector('.close-modal');
+        if (closeButton) closeButton.addEventListener('click', () => closeModal(modal));
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeModal(modal);
+        });
+    });
+
+    // Listener para validación en tiempo real al escribir
+    document.body.addEventListener('input', (event) => {
+        if (event.target.matches('.form-control[required]')) {
+            validateInput(event.target);
+        }
+    });
+
+    // Listener central para el envío de TODOS los formularios
+    document.body.addEventListener('submit', async (event) => {
+        if (event.target.tagName === 'FORM') {
+            event.preventDefault();
+            const form = event.target;
+            if (!validateForm(form)) {
+                showToast('Por favor, corrige los errores en el formulario.', 'error');
+                return;
+            }
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonHTML = submitButton.innerHTML;
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            const formData = new FormData(form);
+            formData.append('formId', form.dataset.formId);
+            try {
+                const formId = form.dataset.formId;
+                let apiEndpoint = '';
+                if (formId === 'roboVehiculo') apiEndpoint = '/api/denuncias';
+                else if (formId === 'quejaFuncionario' || formId === 'felicitacion') apiEndpoint = '/api/reclamos';
+                else if (formId === 'crimenOrganizado') apiEndpoint = '/api/crimen-organizado';
+                else if (formId === 'hurtoSimple' || formId === 'hurtoAgravado') apiEndpoint = '/api/hurtos';
+                else if (formId === 'informacionAnonima') apiEndpoint = '/api/informacion-anonima';
+                else throw new Error('Formulario no configurado.');
+                const response = await fetch(apiEndpoint, { method: 'POST', body: formData });
+                const result = await response.json();
+                if (result.success) {
+                    showToast(result.message || 'Trámite enviado con éxito.', 'success');
+                    form.reset();
+                    closeModal(form.closest('.modal'));
+                } else {
+                    throw new Error(result.error || 'Ocurrió un error desconocido.');
+                }
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonHTML;
+            }
+        }
+    });
+
+    // Listener para el filtrado de tarjetas
+    if (filterButtons) {
+        filterButtons.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                const filter = event.target.dataset.filter;
+                document.querySelectorAll('.card-container .card').forEach(card => {
+                    card.style.display = (filter === 'todos' || card.dataset.category === filter) ? 'block' : 'none';
+                });
+            }
+        });
+    }
+
+    // Listener para la galería Lightbox
+    if (lightbox) {
+        const lightboxImage = document.getElementById('lightbox-image');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightboxImage.src = item.querySelector('img').src;
+                lightbox.classList.add('show');
+            });
+        });
+        if (lightboxClose) lightboxClose.addEventListener('click', () => lightbox.classList.remove('show'));
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('show');
+        });
+    }
+
+    // Listener para mostrar/ocultar campos específicos de robo de vehículo
+    const tipoDenunciaVehicularSelect = document.getElementById('tipoDenunciaVehicular');
+    if (tipoDenunciaVehicularSelect) {
+        const camposEspecificos = document.getElementById('campos-robo-especifico');
+        const inputsEspecificos = camposEspecificos.querySelectorAll('input');
+        tipoDenunciaVehicularSelect.addEventListener('change', () => {
+            if (tipoDenunciaVehicularSelect.value === 'Robo de Vehículo') {
+                camposEspecificos.style.display = 'block';
+                inputsEspecificos.forEach(input => input.setAttribute('required', ''));
+            } else {
+                camposEspecificos.style.display = 'none';
+                inputsEspecificos.forEach(input => input.removeAttribute('required'));
+            }
+        });
+    }
+    
+
+
+    // --- 6. LÓGICA PARA ANIMACIONES AL HACER SCROLL ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible-scroll');
+                // Opcional: deja de observar el elemento una vez que es visible
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, {
+        threshold: 0.1 // La animación se activa cuando el 10% del elemento es visible
+    });
+
+    const hiddenElements = document.querySelectorAll('.hidden-scroll');
+    hiddenElements.forEach(el => observer.observe(el));
+
+
+    // --- 7. EJECUCIÓN INICIAL (MODIFICADA) ---
+    // Quitamos la animación de las tarjetas de aquí porque ahora se controla con el scroll.
+    checkUserSession();
+    
+}); // <-- Esta es la llave de cierre final del DOMContentLoaded.

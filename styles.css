@@ -1,0 +1,850 @@
+/* ================================================ */
+/* === COMISARÍA VIRTUAL V2.0 - OBRA MAESTRA CSS === */
+/* ================================================ */
+
+/* --- 1. FUNDAMENTOS Y VARIABLES DE DISEÑO --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
+
+:root {
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* === INICIO DEL CAMBIO === */
+    --color-primary: #007028;       /* Tu nuevo verde institucional */
+    --color-primary-dark: #005c20; /* Una versión más oscura para el efecto hover */
+    /* === FIN DEL CAMBIO === */
+
+    --color-secondary: #F7C566;    
+    --color-success: #28a745;
+    --color-danger: #dc3545;
+    --color-info: #17a2b8;
+    
+    --color-text: #212529;          /* Gris oscuro para texto */
+    --color-text-muted: #6c757d;    /* Gris más suave para párrafos */
+    --color-border: #dee2e6;        /* Un borde suave */
+    --color-background: #f8f9fa;   /* Fondo general muy claro */
+    --color-white: #ffffff;
+
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --border-radius: 12px;
+}
+
+/* --- 2. RESET Y ESTILOS BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--color-background);
+    color: var(--color-text);
+    padding-top: 70px; /* Un poco más de espacio para el header */
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+}
+
+p {
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+}
+
+/* --- 3. HEADER --- */
+header {
+    background: var(--color-white);
+    padding: 0.75rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 1000;
+    height: 70px;
+}
+.header-left { display: flex; align-items: center; }
+.logo-carabineros { height: 45px; }
+.header-text { font-size: 1.5rem; color: var(--color-primary); margin-left: 10px; font-weight: 700; }
+.header-center { position: absolute; left: 50%; transform: translateX(-50%); }
+.logo-nuevo { height: 50px; }
+.header-right { display: flex; align-items: center; }
+.dropdown img { width: 40px; height: 40px; transition: transform 0.2s ease-in-out; cursor: pointer; }
+.dropdown:hover img { transform: scale(1.1); }
+.dropdown-content {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: var(--color-white);
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease-in-out;
+    z-index: 1100;
+}
+.dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-content a { display: block; padding: 0.75rem 1rem; color: var(--color-text); text-decoration: none; font-weight: 500; }
+.dropdown-content a:hover { background-color: var(--color-background); }
+.dropdown-content a.btn { background: var(--color-primary); color: var(--color-white); border-radius: 6px; text-align: center; margin: 0.5rem; padding: 0.75rem; }
+.dropdown-content a.btn:hover { background: var(--color-primary-dark); }
+
+
+/* --- 4. SECCIÓN HERO --- */
+/* En la sección 4. SECCIÓN HERO */
+.hero {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding: 0 4rem;
+    
+    /* --- INICIO DE LOS CAMBIOS --- */
+    background-image: url('https://i.imgur.com/p8dPH9Q.png'); /* URL de tu imagen */
+    background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    /* --- FIN DE LOS CAMBIOS --- */
+}
+.hero:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);
+    z-index: 2; /* Se asegura que la capa oscura esté sobre el video */
+}
+
+/* AÑADE ESTA NUEVA REGLA */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1; /* Se asegura que el video esté detrás de todo */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3; /* Se asegura que el texto esté sobre la capa oscura y el video */
+    color: var(--color-white);
+    text-align: left;
+    max-width: 650px;
+}
+.hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; color: var(--color-white); text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.hero-content p { font-size: 1.25rem; margin-bottom: 2.5rem; color: rgba(255,255,255,0.9); }
+
+
+/* ======================================= */
+/* === ESTILOS SECCIÓN ¿QUIÉNES SOMOS? === */
+/* ======================================= */
+
+.about-section {
+    background-color: var(--color-white);
+    padding: 6rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-content {
+    flex-basis: 50%;
+    text-align: left;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+}
+
+.features-list li {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.features-list li i {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.about-image {
+    flex-basis: 45%;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+}
+
+/* Hacemos que se apile en pantallas pequeñas */
+@media (max-width: 992px) {
+    .about-container {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    .about-content, .about-image {
+        flex-basis: 100%;
+        text-align: center;
+    }
+    .features-list li {
+        justify-content: center;
+    }
+}
+
+/* --- 5. COMPONENTES REUTILIZABLES (BOTONES) --- */
+.btn { /* Clase base para todos los botones */
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    padding: 0.8rem 1.75rem;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+/* Aplicamos el estilo base al hero-button existente */
+.hero-button {
+    font-size: 1.2rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.8rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+.hero-button:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+/* --- 6. SECCIÓN DE TRÁMITES Y FILTROS --- */
+.section { padding: 5rem 2rem; text-align: center; }
+.section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+.section .section-subtitle { font-size: 1.1rem; max-width: 600px; margin: 0 auto 2.5rem auto; color: var(--color-text-muted); }
+
+.filter-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+.filter-buttons button {
+    background: var(--color-white);
+    color: var(--color-primary);
+    border: 2px solid var(--color-border);
+    padding: 0.6rem 1.25rem;
+    font-weight: 600;
+}
+.filter-buttons button:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+/* --- 7. TARJETAS (CARDS) --- */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.card {
+    background: var(--color-white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    position: relative;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    text-align: left;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+.card h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.card p { font-size: 1rem; margin-bottom: 1.5rem; }
+.card button { /* Estilo unificado de botón */
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+.card button:hover {
+    background: var(--color-primary-dark);
+    transform: scale(1.05);
+}
+/* Borra la regla .icon antigua y añade estas nuevas */
+
+.card-icon-wrapper {
+    background-color: #eaf3ee; /* Un verde muy pálido, casi blanco */
+    color: var(--color-primary);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Lo hacemos un círculo perfecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto; /* Lo centramos horizontalmente y le damos espacio abajo */
+    font-size: 2.5rem; /* Tamaño del icono */
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover .card-icon-wrapper {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.1) rotate(15deg);
+}
+
+/* Ajustamos el texto de la tarjeta para que se centre */
+.card {
+    /* ... (los estilos que ya tenías) ... */
+    text-align: center; /* ¡Nuevo! Centramos todo el contenido de la tarjeta */
+}
+
+.card h3 {
+    text-align: center;
+}
+
+.card p {
+    text-align: center;
+}
+
+/* --- 8. MODALES Y FORMULARIOS --- */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 2000;
+}
+.modal.show { opacity: 1; visibility: visible; }
+.modal-content {
+    background: var(--color-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    max-width: 600px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideDown { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.2s, color 0.2s;
+}
+.close-modal:hover { color: var(--color-danger); transform: rotate(90deg); }
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.modal-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.modal-content .form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    margin-top: 0.25rem;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.modal-content .form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(10, 104, 71, 0.2);
+}
+.modal-content button[type="submit"] {
+    width: 100%;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.modal-content button[type="submit"]:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+.modal-content button[type="submit"]:disabled {
+    background-color: var(--color-text-muted);
+    cursor: not-allowed;
+}
+
+/* ================================= */
+/* === ESTILOS PARA NOTIFICACIONES TOAST === */
+/* ================================= */
+
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.toast.hide {
+    animation: slideOut 0.5s forwards;
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Colores para cada tipo de notificación */
+.toast.success {
+    background-color: var(--color-success, #28a745);
+}
+
+.toast.error {
+    background-color: var(--color-danger, #dc3545);
+}
+
+.toast.info {
+    background-color: var(--color-info, #17a2b8);
+}
+
+/* --- 10. RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .header-center, .header-text {
+        display: none;
+    }
+    .hero {
+        padding: 0 2rem;
+        text-align: center;
+        justify-content: center;
+    }
+    .hero:after {
+        background: rgba(0,0,0,0.5);
+    }
+    .hero-content {
+        text-align: center;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .card-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    .section {
+        padding: 3rem 1rem;
+    }
+}
+
+/* ======================================= */
+/* === ESTILOS SECCIÓN GALERÍA       === */
+/* ======================================= */
+
+.gallery-section {
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    aspect-ratio: 4 / 3; /* Para que todas las imágenes mantengan la proporción */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Evita que las imágenes se deformen */
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 104, 71, 0.6); /* Usa nuestro color primario con transparencia */
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* Estilos para el Lightbox */
+.lightbox {
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: none; /* Oculto por defecto */
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.show {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 85%;
+    animation: zoomIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+} /* <-- ¡LA LLAVE FALTANTE AÑADIDA AQUÍ! */
+
+.lightbox-close:hover {
+    color: var(--color-text-muted);
+}
+
+/* ======================================= */
+/* === ESTILOS SECCIÓN FOOTER          === */
+/* ======================================= */
+
+.site-footer {
+    background-color: #212529; /* Fondo gris oscuro */
+    color: rgba(255, 255, 255, 0.7);
+    padding: 4rem 2rem 0 2rem;
+    margin-top: 4rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-col h4 {
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    background-color: var(--color-primary);
+    height: 3px;
+    width: 50px;
+}
+
+.footer-col p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--color-white);
+    padding-left: 5px;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    border-radius: 50%;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.social-links a:hover {
+    background-color: var(--color-primary);
+    transform: scale(1.1);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+}
+/* Estilos para el nuevo menú de login */
+.dropdown-content.login-options {
+    min-width: 200px;
+    padding: 0.5rem;
+}
+
+.btn-login-option {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem 1rem !important;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.btn-login-option:hover {
+    background-color: var(--color-background) !important;
+}
+
+.btn-login-option i {
+    width: 20px;
+    text-align: center;
+    color: var(--color-primary);
+}
+
+/* Estilo para botones que requieren inicio de sesión */
+.btn-requires-login {
+    background-color: #e9ecef !important; /* Un gris claro */
+    color: #6c757d !important; /* Texto gris oscuro */
+    cursor: not-allowed !important; /* Muestra el cursor de "no permitido" */
+}
+
+/* Animación de vibración para llamar la atención */
+@keyframes shake-header-btn {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake-it {
+    animation: shake-header-btn 0.5s ease-in-out;
+}
+
+/* Contenedor para la información del usuario en el header */
+.user-info-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Estilo para el avatar circular */
+.user-avatar-header {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+}
+
+/* Contenedor para el nombre y el rango (si existe) */
+.user-details-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+
+/* Estilo para el nombre de usuario */
+.user-details-header span {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+/* Estilo para el rango (si es funcionario) */
+.user-details-header strong {
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+/* ======================================= */
+/* === ESTILOS PARA ANIMACIONES SUAVES === */
+/* ======================================= */
+
+/* --- Animación de Entrada para el Contenido del Hero --- */
+.hero-content > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Retrasos para que aparezcan uno por uno */
+.hero-content h1 { animation-delay: 0.2s; }
+.hero-content p { animation-delay: 0.4s; }
+.hero-content .hero-button { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* --- Animación al Hacer Scroll --- */
+.hidden-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.visible-scroll {
+    opacity: 1;
+    transform: translateY(0);
+}
